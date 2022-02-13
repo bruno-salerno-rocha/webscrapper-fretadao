@@ -1,0 +1,67 @@
+<%= form_with(model: profile, local: true) do |form| %>
+  <% if profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+        <% profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :github_url %>
+    <%= form.text_field :github_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :github_user %>
+    <%= form.text_field :github_user %>
+  </div>
+
+  <div class="field">
+    <%= form.label :followers %>
+    <%= form.number_field :followers %>
+  </div>
+
+  <div class="field">
+    <%= form.label :following %>
+    <%= form.number_field :following %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stars %>
+    <%= form.number_field :stars %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_year_contributions %>
+    <%= form.number_field :last_year_contributions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :profile_picture_url %>
+    <%= form.text_field :profile_picture_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organization %>
+    <%= form.text_field :organization %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
