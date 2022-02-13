@@ -24,22 +24,6 @@ RSpec.describe "profiles/edit", type: :view do
       assert_select "input[name=?]", "profile[name]"
 
       assert_select "input[name=?]", "profile[github_url]"
-
-      assert_select "input[name=?]", "profile[github_user]"
-
-      assert_select "input[name=?]", "profile[followers]"
-
-      assert_select "input[name=?]", "profile[following]"
-
-      assert_select "input[name=?]", "profile[stars]"
-
-      assert_select "input[name=?]", "profile[last_year_contributions]"
-
-      assert_select "input[name=?]", "profile[profile_picture_url]"
-
-      assert_select "input[name=?]", "profile[organization]"
-
-      assert_select "input[name=?]", "profile[location]"
     end
   end
 end
