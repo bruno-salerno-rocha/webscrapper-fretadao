@@ -17,11 +17,17 @@ RSpec.describe "/profiles", type: :request do
   # Profile. As you add validations to Profile, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Foo",
+      github_url: "www.foo.com"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: '',
+      github_url: ''
+    }
   }
 
   describe "GET /index" do
@@ -86,14 +92,14 @@ RSpec.describe "/profiles", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "New Foo" }
       }
 
       it "updates the requested profile" do
         profile = Profile.create! valid_attributes
         patch profile_url(profile), params: { profile: new_attributes }
         profile.reload
-        skip("Add assertions for updated state")
+        expect(profile.name).to eq("New Foo")
       end
 
       it "redirects to the profile" do
