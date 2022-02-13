@@ -82,9 +82,9 @@ RSpec.describe "/profiles", type: :request do
         }.to change(Profile, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "returns a unprocessable entity response" do
         post profiles_url, params: { profile: invalid_attributes }
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -111,10 +111,10 @@ RSpec.describe "/profiles", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "returns a unprocessable entity response" do
         profile = Profile.create! valid_attributes
         patch profile_url(profile), params: { profile: invalid_attributes }
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
