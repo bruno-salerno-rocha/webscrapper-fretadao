@@ -60,6 +60,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:name, :github_url, :github_user, :followers, :following, :stars, :last_year_contributions, :profile_picture_url, :organization, :location)
+      params.require(:profile).permit(:name, :github_url)
     end
 end
