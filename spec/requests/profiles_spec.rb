@@ -19,7 +19,7 @@ RSpec.describe "/profiles", type: :request do
   let(:valid_attributes) {
     {
       name: "Foo",
-      github_url: "www.foo.com"
+      github_url: "http://www.foo.com"
     }
   }
 
