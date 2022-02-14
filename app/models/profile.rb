@@ -1,6 +1,6 @@
 class Profile < ApplicationRecord
     validates :name, presence: true
-    validates :github_url, presence: true
+    validates :github_url, presence: true, format: URI::regexp(%w[http https])
 
     before_save :shorten_github_url
 
