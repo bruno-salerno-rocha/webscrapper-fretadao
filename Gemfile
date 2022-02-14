@@ -40,6 +40,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   # For debugging
   gem 'pry', '~> 0.13.1'
+  # Stores HTTP requests
+  gem "vcr"
 end
 
 group :development do
