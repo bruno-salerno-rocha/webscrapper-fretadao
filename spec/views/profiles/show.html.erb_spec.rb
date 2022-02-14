@@ -17,9 +17,10 @@ RSpec.describe "profiles/show", type: :view do
   end
 
   it "renders attributes in <p>" do
+    short_url = Link.create(url: "Github Url").short
     render
     expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Github Url/)
+    expect(rendered).to match(/#{short_url}/)
     expect(rendered).to match(/Github User/)
     expect(rendered).to match(/2/)
     expect(rendered).to match(/3/)

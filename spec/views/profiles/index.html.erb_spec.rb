@@ -33,7 +33,7 @@ RSpec.describe "profiles/index", type: :view do
   it "renders a list of profiles" do
     render
     assert_select "tr>td", text: "Name".to_s, count: 2
-    assert_select "tr>td", text: "Github Url".to_s, count: 2
+    assert_select "tr>td", text: "#{Link.shorten("Github Url")}", count: 2
     assert_select "tr>td", text: "Github User".to_s, count: 2
     assert_select "tr>td", text: 2.to_s, count: 2
     assert_select "tr>td", text: 3.to_s, count: 2
