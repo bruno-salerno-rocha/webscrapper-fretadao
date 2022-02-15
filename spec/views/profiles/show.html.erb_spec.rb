@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "profiles/show", type: :view do
   let (:url) { "http://www.foo.com" }
   before(:each) do
+    allow_any_instance_of(Profile).to receive(:scrape_attributes)
     @profile = assign(:profile, Profile.create!(
       name: "Name",
       github_url: url,

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "profiles/edit", type: :view do
   before(:each) do
+    allow_any_instance_of(Profile).to receive(:scrape_attributes)
     @profile = assign(:profile, Profile.create!(
       name: "MyString",
       github_url: "https://github.com/bruno-salerno-rocha",
