@@ -7,7 +7,7 @@ RSpec.describe ProfilesScraper do
       scraper = ProfilesScraper.new(
         github_url: "https://github.com/bruno-salerno-rocha"
       )
-      @scraper_attributes = scraper.get_profile_attributes
+      VCR.use_cassette("github_profile") { @scraper_attributes = scraper.get_profile_attributes }
     end
     
     it "return a Hash" do
