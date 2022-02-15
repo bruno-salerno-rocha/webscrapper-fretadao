@@ -44,6 +44,8 @@ group :development, :test do
   gem 'pry', '~> 0.13.1'
   # Stores HTTP requests
   gem "vcr"
+  # Mocks webpages
+  gem "webmock"
 end
 
 group :development do
