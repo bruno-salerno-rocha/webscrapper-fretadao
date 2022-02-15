@@ -1,12 +1,12 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
 
-  # GET /profiles or /profiles.json
+  # GET /profiles
   def index
     @profiles = Profile.all
   end
 
-  # GET /profiles/1 or /profiles/1.json
+  # GET /profiles/1
   def show
   end
 
@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
   def edit
   end
 
-  # POST /profiles or /profiles.json
+  # POST /profiles
   def create
     @profile = Profile.new(profile_params)
 
@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /profiles/1 or /profiles/1.json
+  # PATCH/PUT /profiles/1
   def update
     respond_to do |format|
       if profile_params.present? && @profile.update(profile_params)
@@ -43,7 +43,7 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # DELETE /profiles/1 or /profiles/1.json
+  # DELETE /profiles/1
   def destroy
     @profile.destroy
 
