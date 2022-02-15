@@ -5,7 +5,7 @@ RSpec.describe "profiles/edit", type: :view do
     allow_any_instance_of(Profile).to receive(:scrape_attributes)
     @profile = assign(:profile, Profile.create!(
       name: "MyString",
-      github_url: "https://github.com/bruno-salerno-rocha",
+      github_url: "http://www.foo.com",
       github_user: "MyString",
       followers: 1,
       following: 1,
