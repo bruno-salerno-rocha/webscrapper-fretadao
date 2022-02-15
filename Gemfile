@@ -19,6 +19,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Makes HTTP requests
 gem 'httparty'
+# Parses HTML and XML
+gem 'nokogiri'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
