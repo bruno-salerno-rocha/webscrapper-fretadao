@@ -14,7 +14,7 @@ RSpec.describe ProfilesScraper do
       expect(@scraper_attributes).to be_a(Hash)
     end
 
-    it "contains all @scraper_attributes of profile excpet name and github_url" do
+    it "contains all attributes of profile excpet name and github_url" do
       expect(@scraper_attributes).to have_key(:github_user)
       expect(@scraper_attributes).to have_key(:followers)
       expect(@scraper_attributes).to have_key(:following)
