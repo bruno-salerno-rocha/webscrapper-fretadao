@@ -7,6 +7,7 @@ class Profile < ApplicationRecord
     private
 
     def shorten_github_url
+        return unless self.github_url_changed?
         self.github_url = Link.shorten(self.github_url)
     end
 
