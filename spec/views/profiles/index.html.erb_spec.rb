@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "profiles/index", type: :view do
-  let (:url) { "http://www.foo.com" }
+  let (:url) { "https://github.com/bruno-salerno-rocha" }
   before(:each) do
     assign(:profiles, [
       Profile.create!(

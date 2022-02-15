@@ -19,7 +19,7 @@ RSpec.describe "/profiles", type: :request do
   let(:valid_attributes) {
     {
       name: "Foo",
-      github_url: "http://www.foo.com"
+      github_url: "https://github.com/bruno-salerno-rocha"
     }
   }
 
@@ -30,17 +30,21 @@ RSpec.describe "/profiles", type: :request do
     }
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
+  let!(:profile) do
+    VCR.use_cassette("github_profile") do
       Profile.create! valid_attributes
+    end
+  end
+
+  describe "GET /index" do
+    it "renders a successful response", :create_profile do
       get profiles_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
-      profile = Profile.create! valid_attributes
+    it "renders a successful response", :create_profile do
       get profile_url(profile)
       expect(response).to be_successful
     end
@@ -54,8 +58,7 @@ RSpec.describe "/profiles", type: :request do
   end
 
   describe "GET /edit" do
-    it "render a successful response" do
-      profile = Profile.create! valid_attributes
+    it "render a successful response", :create_profile do
       get edit_profile_url(profile)
       expect(response).to be_successful
     end
@@ -64,26 +67,34 @@ RSpec.describe "/profiles", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Profile" do
-        expect {
-          post profiles_url, params: { profile: valid_attributes }
-        }.to change(Profile, :count).by(1)
+        VCR.use_cassette("github_profile") do
+          expect {
+            post profiles_url, params: { profile: valid_attributes }
+          }.to change(Profile, :count).by(1)
+        end
       end
 
       it "redirects to the created profile" do
-        post profiles_url, params: { profile: valid_attributes }
+        VCR.use_cassette("github_profile") do
+          post profiles_url, params: { profile: valid_attributes }
+        end
         expect(response).to redirect_to(profile_url(Profile.last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Profile" do
-        expect {
-          post profiles_url, params: { profile: invalid_attributes }
-        }.to change(Profile, :count).by(0)
+        VCR.use_cassette("github_profile") do
+          expect {
+            post profiles_url, params: { profile: invalid_attributes }
+          }.to change(Profile, :count).by(0)
+        end
       end
 
       it "returns a unprocessable entity response" do
-        post profiles_url, params: { profile: invalid_attributes }
+        VCR.use_cassette("github_profile") do
+          post profiles_url, params: { profile: invalid_attributes }
+        end
         expect(response.status).to eq(422)
       end
     end
@@ -95,24 +106,25 @@ RSpec.describe "/profiles", type: :request do
         { name: "New Foo" }
       }
 
-      it "updates the requested profile" do
-        profile = Profile.create! valid_attributes
-        patch profile_url(profile), params: { profile: new_attributes }
+      it "updates the requested profile", :create_profile do
+        VCR.use_cassette("github_profile") do
+          patch profile_url(profile), params: { profile: new_attributes }
+        end
         profile.reload
         expect(profile.name).to eq("New Foo")
       end
 
-      it "redirects to the profile" do
-        profile = Profile.create! valid_attributes
-        patch profile_url(profile), params: { profile: new_attributes }
+      it "redirects to the profile", :create_profile do
+        VCR.use_cassette("github_profile") do
+          patch profile_url(profile), params: { profile: new_attributes }
+        end
         profile.reload
         expect(response).to redirect_to(profile_url(profile))
       end
     end
 
     context "with invalid parameters" do
-      it "returns a unprocessable entity response" do
-        profile = Profile.create! valid_attributes
+      it "returns a unprocessable entity response", :create_profile do
         patch profile_url(profile), params: { profile: invalid_attributes }
         expect(response.status).to eq(422)
       end
@@ -120,15 +132,13 @@ RSpec.describe "/profiles", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested profile" do
-      profile = Profile.create! valid_attributes
+    it "destroys the requested profile", :create_profile do
       expect {
         delete profile_url(profile)
       }.to change(Profile, :count).by(-1)
     end
 
-    it "redirects to the profiles list" do
-      profile = Profile.create! valid_attributes
+    it "redirects to the profiles list", :create_profile do
       delete profile_url(profile)
       expect(response).to redirect_to(profiles_url)
     end

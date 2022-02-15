@@ -4,7 +4,7 @@ RSpec.describe "profiles/edit", type: :view do
   before(:each) do
     @profile = assign(:profile, Profile.create!(
       name: "MyString",
-      github_url: "http://www.foo.com",
+      github_url: "https://github.com/bruno-salerno-rocha",
       github_user: "MyString",
       followers: 1,
       following: 1,
