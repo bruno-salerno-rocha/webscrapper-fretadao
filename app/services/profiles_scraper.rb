@@ -9,30 +9,22 @@ class ProfilesScraper
     def get_profile_attributes
         html = HTTParty.get(@github_url)
         page = Nokogiri::HTML(html)
-        @attributes[:github_user] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[1]/div/div[2]/div[1]/div[2]/h1/span[2]"
-        ).text.strip
-        @attributes[:followers] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/a[1]/span"
-        ).text.strip.to_i
-        @attributes[:following] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/a[2]/span"
-        ).text.strip.to_i
-        @attributes[:stars] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[2]/div[1]/nav/a[5]/span"
-        ).text.strip.to_i
-        @attributes[:last_year_contributions] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/h2"
-        ).text.strip.split("\n").first.to_i
-        @attributes[:profile_picture_url] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[1]/div/div[2]/div[1]/div[1]/a/img/@src"
-        ).text
-        @attributes[:organization] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[1]/div/div[2]/div[2]/div[2]/ul/li[@itemprop=\"worksFor\"]/span/div"
-        ).text.split(" ").join(";")
-        @attributes[:location] = page.xpath(
-            "//*[@id=\"js-pjax-container\"]/div[2]/div/div[1]/div/div[2]/div[2]/div[2]/ul/li[@itemprop=\"homeLocation\"]/span"
-        ).text
+        @attributes[:github_user] =
+            page.xpath("//span[@itemprop=\"additionalName\"]").text.strip
+        @attributes[:followers] =
+            page.xpath("//a[contains(@href, \"followers\")]/span").text.strip.to_i
+        @attributes[:following] =
+            page.xpath("//a[contains(@href, \"following\")]/span").text.strip.to_i
+        @attributes[:stars] =
+            page.xpath("(//a[@data-tab-item = \"stars\"]/span)[1]").text.strip.to_i
+        @attributes[:last_year_contributions] =
+            page.xpath("//*[@class=\"js-yearly-contributions\"]/div/h2").text.strip.split("\n").first.to_i
+        @attributes[:profile_picture_url] =
+            page.xpath("//*[@alt=\"Avatar\"]/@src").text
+        @attributes[:organization] =
+            page.xpath("//ul[@class=\"vcard-details\"]/li[@itemprop=\"worksFor\"]/span/div").text
+        @attributes[:location] =
+            page.xpath("//ul[@class=\"vcard-details\"]/li[@itemprop=\"homeLocation\"]/span").text
         @attributes
     end
 end
