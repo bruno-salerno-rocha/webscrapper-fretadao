@@ -28,7 +28,6 @@ RSpec.describe "profiles/show", type: :view do
     expect(rendered).to match(/3/)
     expect(rendered).to match(/4/)
     expect(rendered).to match(/5/)
-    expect(rendered).to match(/Profile Picture Url/)
     expect(rendered).to match(/Organization/)
     expect(rendered).to match(/Location/)
   end
