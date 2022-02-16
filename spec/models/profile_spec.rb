@@ -9,22 +9,22 @@ RSpec.describe Profile, type: :model do
     }
   end
 
+  let(:scraped_attributes) do
+    {
+      github_user: "User",
+      followers: 10,
+      following: 10,
+      stars: 5,
+      last_year_contributions: 100,
+      profile_picture_url: "/spec/img/logo.png",
+      organization: "Organization",
+      location: "Location"
+    }
+  end
+
   let(:profile) { Profile.create(attributes) }
 
   describe "#scrape_attributes" do
-
-    let(:scraped_attributes) do
-      {
-        github_user: "User",
-        followers: 10,
-        following: 10,
-        stars: 5,
-        last_year_contributions: 100,
-        profile_picture_url: "/spec/img/logo.png",
-        organization: "Organization",
-        location: "Location"
-      }
-    end
 
     it "sets the profile with the attributes from the scraper" do
       allow_any_instance_of(ProfilesScraper).to receive(:get_profile_attributes) { scraped_attributes }
@@ -44,6 +44,19 @@ RSpec.describe Profile, type: :model do
       profile.scrape_attributes
       expect(profile.name).to eq(attributes[:name])
       expect(profile.github_url).to eq(Link.shorten(attributes[:github_url]))
+    end
+
+  end
+
+  describe "#self.with_any_column_like" do
+    Profile.column_names.each do |column|
+      it "can retrieve the profile by #{column}" do
+        allow_any_instance_of(ProfilesScraper).to receive(:get_profile_attributes) { scraped_attributes }
+        profile.save
+        expect(
+          Profile.with_any_column_like(attributes[column]).count
+        ).to eq(1)
+      end
     end
   end
 end
