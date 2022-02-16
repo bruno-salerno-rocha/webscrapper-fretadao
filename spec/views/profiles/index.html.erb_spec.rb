@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "profiles/index", type: :view do
-  let (:url) { "https://github.com/bruno-salerno-rocha" }
+  let (:url) { "https://www.foo.com" }
   before(:each) do
     allow_any_instance_of(Profile).to receive(:scrape_attributes)
     assign(:profiles, [
