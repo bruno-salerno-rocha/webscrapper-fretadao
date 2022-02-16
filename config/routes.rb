@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :profiles do
-    post 'rescan'
+    post 'rescan', on: :member
   end
   get '/s/:slug', to: 'links#show', as: :short
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
