@@ -7,27 +7,11 @@ RSpec.describe "profiles/index", type: :view do
     assign(:profiles, [
       Profile.create!(
         name: "Name",
-        github_url: url,
-        github_user: "Github User",
-        followers: 2,
-        following: 3,
-        stars: 4,
-        last_year_contributions: 5,
-        profile_picture_url: "Profile Picture Url",
-        organization: "Organization",
-        location: "Location"
+        github_url: url
       ),
       Profile.create!(
         name: "Name",
-        github_url: url,
-        github_user: "Github User",
-        followers: 2,
-        following: 3,
-        stars: 4,
-        last_year_contributions: 5,
-        profile_picture_url: "Profile Picture Url",
-        organization: "Organization",
-        location: "Location"
+        github_url: url
       )
     ])
   end
@@ -37,13 +21,5 @@ RSpec.describe "profiles/index", type: :view do
     render
     assert_select "tr>td", text: "Name".to_s, count: 2
     assert_select "tr>td", text: "#{short_url}", count: 2
-    assert_select "tr>td", text: "Github User".to_s, count: 2
-    assert_select "tr>td", text: 2.to_s, count: 2
-    assert_select "tr>td", text: 3.to_s, count: 2
-    assert_select "tr>td", text: 4.to_s, count: 2
-    assert_select "tr>td", text: 5.to_s, count: 2
-    assert_select "tr>td", text: "Profile Picture Url".to_s, count: 2
-    assert_select "tr>td", text: "Organization".to_s, count: 2
-    assert_select "tr>td", text: "Location".to_s, count: 2
   end
 end
