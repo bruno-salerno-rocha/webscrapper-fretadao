@@ -52,11 +52,18 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # GET /profiles/1/rescan
+  # POST /profiles/1/rescan
   def rescan
-    @profile.get_profile_attributes
+    @profile.scrape_attributes
+
+    if @profile.save
+      message = "Profile was successfully updated."
+    else
+      message = "Couldn't update profile."
+    end
+
     respond_to do |format|
-      format.html { redirect_to profile_url(@profile), notice: "Profile was successfully updated." }
+      format.html { redirect_to profile_url(@profile), notice: message }
     end
   end
 
