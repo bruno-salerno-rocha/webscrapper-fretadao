@@ -34,5 +34,9 @@ RSpec.describe ProfilesController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/profiles/1").to route_to("profiles#destroy", id: "1")
     end
+
+    it "routes to #rescan via POST" do
+      expect(post: "/profiles/1/rescan").to route_to("profiles#rescan", id: "1")
+    end
   end
 end
