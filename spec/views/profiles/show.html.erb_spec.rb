@@ -12,7 +12,7 @@ RSpec.describe "profiles/show", type: :view do
       following: 3,
       stars: 4,
       last_year_contributions: 5,
-      profile_picture_url: "Profile Picture Url",
+      profile_picture_url: "/spec/img/logo.png",
       organization: "Organization",
       location: "Location"
     ))
