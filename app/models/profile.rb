@@ -12,6 +12,10 @@ class Profile < ApplicationRecord
             scraper.get_profile_attributes
         )
     end
+ 
+    def self.with_any_column_like(search_key)
+        where("#{column_names.join(' || ')} like ?", "%#{search_key}%")         
+    end
 
     private
 
