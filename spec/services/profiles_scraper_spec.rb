@@ -30,9 +30,9 @@ RSpec.describe ProfilesScraper do
       expect(@scraper_attributes[:followers]).to eq(0)
       expect(@scraper_attributes[:following]).to eq(0)
       expect(@scraper_attributes[:stars]).to eq(1)
-      expect(@scraper_attributes[:last_year_contributions]).to eq(30)
+      expect(@scraper_attributes[:last_year_contributions]).to eq(54)
       expect(@scraper_attributes[:profile_picture_url]).to eq("https://avatars.githubusercontent.com/u/21284377?v=4")
-      expect(@scraper_attributes[:organization]).to eq("@Lesath-Corportation @FuiOrganization Teste Teste2")
+      expect(@scraper_attributes[:organization]).to eq("@Lesath-Corporation @FuiOrganization Teste Teste3")
       expect(@scraper_attributes[:location]).to eq("São Paulo")
     end
   end
