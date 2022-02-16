@@ -238,7 +238,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry (~> 0.13.1)
   puma (~> 4.1)
-  rails (~> 6.0.2, >= 6.0.2.1)
+  rails (= 6.1.4.6)
   rspec-rails (~> 5.0.0)
   sass-rails (>= 6)
   simplecov
