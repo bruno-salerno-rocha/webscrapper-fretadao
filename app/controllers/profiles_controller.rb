@@ -3,7 +3,13 @@ class ProfilesController < ApplicationController
 
   # GET /profiles
   def index
-    @profiles = Profile.all
+    if search_params.blank?
+      @profiles = Profile.all
+    else
+      @profiles = Profile.with_any_column_like(
+        search_params[:search]
+      )
+    end
   end
 
   # GET /profiles/1
@@ -76,5 +82,9 @@ class ProfilesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def profile_params
       params.require(:profile).permit(:name, :github_url)
+    end
+
+    def search_params
+      params.permit(:search)
     end
 end
