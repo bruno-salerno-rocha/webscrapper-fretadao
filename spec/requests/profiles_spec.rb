@@ -37,9 +37,18 @@ RSpec.describe "/profiles", type: :request do
   end
 
   describe "GET /index" do
-    it "renders a successful response", :create_profile do
-      get profiles_url
-      expect(response).to be_successful
+    context "without search parameters" do
+      it "renders a successful response", :create_profile do
+        get profiles_url
+        expect(response).to be_successful
+      end
+    end
+
+    context "with search parameters" do
+      it "renders a successful response", :create_profile do
+        get profiles_url, params: { search: "foo" }
+        expect(response).to be_successful
+      end
     end
   end
 
