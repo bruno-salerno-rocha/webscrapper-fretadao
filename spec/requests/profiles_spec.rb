@@ -143,4 +143,29 @@ RSpec.describe "/profiles", type: :request do
       expect(response).to redirect_to(profiles_url)
     end
   end
+
+  describe "POST /index" do
+    before(:each) do
+      allow_any_instance_of(Profile).to receive(:scrape_attributes)
+    end
+    context "if saves sucessfully" do
+      it "redirects to the profile", :create_profile do
+        VCR.use_cassette("github_profile") do
+          post rescan_profile_url(profile)
+        end
+        expect(response).to redirect_to(profile_url(profile))
+      end
+    end
+
+    context "if doesn't save sucessfully" do
+      it "redirects to the profile", :create_profile do
+        allow_any_instance_of(Profile).to receive(:save) { false }
+        VCR.use_cassette("github_profile") do
+          post rescan_profile_url(profile)
+        end
+        expect(response).to redirect_to(profile_url(profile))
+      end
+    end
+  end
+
 end
