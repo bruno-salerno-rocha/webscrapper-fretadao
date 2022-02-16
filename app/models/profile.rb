@@ -4,13 +4,6 @@ class Profile < ApplicationRecord
 
     before_save :shorten_github_url, :scrape_attributes
 
-    private
-
-    def shorten_github_url
-        return unless self.github_url_changed?
-        self.github_url = Link.shorten(self.github_url)
-    end
-
     def scrape_attributes
         slug = self.github_url.split('/').last
         url = Link.find_by_slug(slug).url
@@ -18,5 +11,12 @@ class Profile < ApplicationRecord
         self.attributes = self.attributes.merge(
             scraper.get_profile_attributes
         )
+    end
+
+    private
+
+    def shorten_github_url
+        return unless self.github_url_changed?
+        self.github_url = Link.shorten(self.github_url)
     end
 end
