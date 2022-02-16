@@ -14,7 +14,7 @@ class Profile < ApplicationRecord
     end
  
     def self.with_any_column_like(search_key)
-        where("#{column_names.join(' || ')} like ?", "%#{search_key}%")         
+        where("#{column_names.join(' || ')} ilike ?", "%#{search_key}%")         
     end
 
     private
