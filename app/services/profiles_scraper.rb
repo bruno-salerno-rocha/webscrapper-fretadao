@@ -8,7 +8,7 @@ class ProfilesScraper
 
     def get_profile_attributes
         html = HTTParty.get(@github_url)
-        page = Nokogiri::HTML(html)
+        page = Nokogiri::HTML(html.body)
         @attributes[:github_user] =
             page.xpath("//span[@itemprop=\"additionalName\"]").text.strip
         @attributes[:followers] =
