@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: %i[ show edit update destroy ]
+  before_action :set_profile, only: %i[ show edit update destroy rescan]
 
   # GET /profiles
   def index
@@ -49,6 +49,14 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to profiles_url, notice: "Profile was successfully destroyed." }
+    end
+  end
+
+  # GET /profiles/1/rescan
+  def rescan
+    @profile.get_profile_attributes
+    respond_to do |format|
+      format.html { redirect_to profile_url(@profile), notice: "Profile was successfully updated." }
     end
   end
 
