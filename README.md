@@ -5,7 +5,7 @@
 * Rails 6.0.4.6
 * Node 16.x
 
-Após certificação dos requerimentos executar os seguintes comandos:
+Após certificação dos requisitos executar os seguintes comandos:
 * ```bundle install```
 * ```yarn install```
 * ```rails db:setup```
